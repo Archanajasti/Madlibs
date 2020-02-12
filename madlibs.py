@@ -35,11 +35,12 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    no = request.args.get("goodbye.html")
+    yes = request.args.get("game.html")
 
-    return render_template("compliment.html",
-                           person=player,
-                           compliment=compliment)
+    return render_template("playgame.html", person=player,
+                           Yes=yes,
+                           No=no)
 
 
 if __name__ == '__main__':
