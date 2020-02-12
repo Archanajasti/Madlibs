@@ -22,26 +22,59 @@ def start_here():
     return "Hi! This is the home page."
 
 
+
 @app.route('/hello')
 def say_hello():
     """Say hello to user."""
 
-    return render_template("hello.html")
+    return render_template("playgame.html")
 
 
-@app.route('/greet')
+@app.route('/playgame')
 def greet_person():
     """Greet user with compliment."""
 
     player = request.args.get("person")
 
-    no = request.args.get("goodbye.html")
-    yes = request.args.get("game.html")
+    play_game = request.args.get("game")
+    if play_game == "No":
+            return render_template("goodbye.html", person=player)
+    else:
 
-    return render_template("playgame.html", person=player,
-                           Yes=yes,
-                           No=no)
+        return render_template("game.html", person=player)
 
+
+@app.route('/goodbye')
+def goodbye():
+    """say goodbye"""
+
+    player = request.args.get("person")
+
+    return render_template("goodbye.html", person=player)
+
+
+@app.route('/game')
+def show_madlib_form():
+    player = request.args.get("person")
+    name_p = request.args.get("name")
+    color_p = request.args.get("color")
+    noun_p = request.args.get("noun")
+    adj = request.args.get("adjective")
+
+    return render_template("game.html", person=player, name=name_p,
+                     color=color_p, noun=noun_p, adjective=adj)
+
+
+@app.route('/madlib')
+def show_madlib():
+    player = request.args.get("person")
+    name_p = request.args.get("name")
+    color_p = request.args.get("color")
+    noun_p = request.args.get("noun")
+    adj = request.args.get("adjective")
+
+    return render_template("madlib.html", person=player, name=name_p,
+    color=color_p, noun=noun_p, adjective=adj)
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
